@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-export default function delays() {
+export default function delays( props ) {
     const [isSSR, setIsSSR] = useState(true);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function delays() {
             boxShadow:"10px 10px 5px #888888",
             border:"1px solid #000000",
             background:"white"}}>
-          &nbsp;Flight Delays from ORD to AUS by weather&nbsp;</div>
+          &nbsp;Flight Delays from {props.origin} to {props.dest} by weather&nbsp;{props.origin}</div>
         <p style={{bottomMargin:"10px"}}>
           <table className="CSS_Table_Example" style={{width:"60%", margin:"auto"}}>
         <tr><td>Clear</td><td>Fog</td><td>Rain</td><td>Snow</td><td>Hail</td><td>Thunder</td><td>Tornado</td></tr>
@@ -28,4 +28,12 @@ export default function delays() {
         </table>
         </p>
     </body></div>)
+}
+
+export async function getServerSideProps({query}) {
+  return {
+    props: { origin: query.origin,
+             dest: query.dest }
+  };
+  
 }
