@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { DynamoDBClient, ListTablesCommand, GetItemCommand } from "@aws-sdk/client-dynamodb";
-const client = new DynamoDBClient({ region: "us-east-1" });
+const client = new DynamoDBClient({ region: "us-east-2" });
 
 export default function delays( props ) {
     const [isSSR, setIsSSR] = useState(true);
